@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/auth/";
+const API_URL = "http://localhost:4000/user/";
 
 class AuthService {
   login(username, password) {
     return axios
-      .post(API_URL + "signin", { username, password })
+      .post(API_URL + "login", { username, password })
       .then((response) => {
         if (response.data.accessToken) {
           localStorage.setItem("user", JSON.stringify(response.data));
@@ -19,11 +19,9 @@ class AuthService {
     localStorage.removeItem("user");
   }
 
-  register(username, email, password) {
-    return axios.post(API_URL + "signup", {
-      username,
-      email,
-      password,
+  register(firstName, lastName, dateOfBirth, address, state, country, city, phoneNumber, userName, password) {
+    return axios.post(API_URL + "register", {
+      firstName, lastName, dateOfBirth, address, state, country, city, phoneNumber, userName, password
     });
   }
 }
